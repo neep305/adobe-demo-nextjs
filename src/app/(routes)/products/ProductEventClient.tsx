@@ -1,25 +1,15 @@
-'use client';
+"use client";
 
 import { useEffect } from 'react';
+import { track } from "@/lib/analytics/track";
 
 export default function ProductEventClient() {
     useEffect(() => {
-        console.log('ProductEventClient');
-
-        (window as any).dataLayer?.push({
-            event: 'pageview',
-            pageCategory: 'Products',
-        });
+        void track("page_view", { pageName: "products" });
     }, []);
 
     const handleBuyClick = () => {
-        console.log('Buy clicked');
-        (window as any).dataLayer?.push({
-            event: 'product_click',
-            product_name: 'Product 1',
-            product_price: 100,
-            product_id: '123',
-        });
+        void track("cta_click", { name: "product_buy" });
     }
 
     return (
